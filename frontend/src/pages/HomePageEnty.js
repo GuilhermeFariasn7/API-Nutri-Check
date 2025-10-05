@@ -1,11 +1,11 @@
 import React from 'react';
-import HomeForm from '../components/HomeForm';
+import HomeFormEnty from '../components/HomeFormEnty';
 
 
 function HomePage() {
   return (
     <div>
-      <HomeForm />
+      <HomeFormEnty />
     </div>
   );
 }

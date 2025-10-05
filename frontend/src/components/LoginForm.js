@@ -15,7 +15,14 @@ function LoginForm() {
         // Simula login
         setTimeout(() => {
             alert(`Usuário: ${username}, estaremos lhe redirecionando para página inicial`);
-            navigate('/home');
+            if (username == "admin") /* Mudar aqui depois para o tipo do usuário redirecionar para dasboard do admin */
+            {
+                navigate('/homeAdmin');
+            }
+            else
+            {   navigate('/homeEnty')
+
+            }
             setIsLoading(false);
         }, 1000);
     };
