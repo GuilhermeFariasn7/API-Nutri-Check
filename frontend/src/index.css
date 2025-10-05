@@ -1,0 +1,196 @@
+html, body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #CEEDF2;
+    background: linear-gradient(179deg, rgba(206, 237, 242, 1) 0%, rgba(255, 255, 255, 1) 50%);
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    gap: 30px;
+}
+
+/* Cabeçalho com título e descrição */
+.login-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Ícone do topo (no header) */
+.login-header .icon-top {
+    width: 60px;
+    height: 60px;
+    background-color: #00796b;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 28px;
+}
+
+/* Título principal no header */
+.login-header h1 {
+    color: #133439;
+    font-weight: 700;
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    margin-bottom: 5px;
+}
+
+/* Subtítulo no header */
+.login-header .subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: #00796b;
+    margin: 0;
+}
+
+/* Card central */
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    padding: 40px 30px;
+    text-align: center;
+}
+
+/* Seção de acesso dentro do card */
+.login-card h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #004d40;
+}
+
+.instruction {
+    font-size: 13px;
+    color: #607d8b;
+    margin-bottom: 20px;
+}
+
+/* Inputs */
+.input-container {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 12px 40px 12px 15px;
+    border: 1px solid #b0bec5;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.login-card input:focus {
+    border-color: #00796b;
+    outline: none;
+    box-shadow: 0 0 4px rgba(0, 121, 107, 0.5);
+}
+
+.input-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #607d8b;
+    width: 20px;
+    height: 20px;
+}
+
+/* Botão */
+.login-card button {
+    width: 100%;
+    padding: 12px;
+    background-color: #00796b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.login-card button:hover {
+    background-color: #004d40;
+}
+
+.login-card button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.button-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+.loading-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #fff;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Bloco de acesso padrão */
+.default-access {
+    background-color: #e0f2f1;
+    border: 1px solid #b2dfdb;
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 13px;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.default-access p {
+    margin: 0 0 5px 0;
+}
+
+.default-access code {
+    background-color: #b2dfdb;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-family: monospace;
+}
