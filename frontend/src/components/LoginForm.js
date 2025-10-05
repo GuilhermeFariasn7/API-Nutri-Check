@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Shield, UserCheck, AlertCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -12,7 +14,8 @@ function LoginForm() {
 
         // Simula login
         setTimeout(() => {
-            alert(`Usuário: ${username}\nSenha: ${password}`);
+            alert(`Usuário: ${username}, estaremos lhe redirecionando para página inicial`);
+            navigate('/home');
             setIsLoading(false);
         }, 1000);
     };
@@ -30,12 +33,10 @@ function LoginForm() {
             
             {/* Card de login separado */}
             <div className="login-card">
-                {/* Seção de login */}
                 <h2>Acesso ao Sistema</h2>
                 <p className="instruction">Digite suas credenciais para continuar</p>
                 
                 <form onSubmit={handleSubmit}>
-                    {/* Usuário */}
                     <div className="input-container">
                         <input
                             type="text"
@@ -46,8 +47,6 @@ function LoginForm() {
                         />
                         <UserCheck className="input-icon" />
                     </div>
-
-                    {/* Senha */}
                     <div className="input-container">
                         <input
                             type="password"
@@ -58,8 +57,6 @@ function LoginForm() {
                         />
                         <Shield className="input-icon" />
                     </div>
-
-                    {/* Botão */}
                     <button type="submit" disabled={isLoading}>
                         {isLoading ? (
                             <div className="loading-container">
@@ -75,12 +72,7 @@ function LoginForm() {
                     </button>
                 </form>
 
-                {/* Bloco de acesso padrão */}
-                <div className="default-access">
-                    <p><strong>Acesso Padrão:</strong></p>
-                    <p>Usuário: <code>aditm</code></p>
-                    <p>Senha: <code>aditm</code></p>
-                </div>
+                
             </div>
         </div>
     );
