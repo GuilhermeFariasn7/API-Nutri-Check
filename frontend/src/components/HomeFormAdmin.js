@@ -10,8 +10,9 @@ function HomeForm() {
         navigate('/login');
     };
 
-    const handleCreateTestUser = () => {
-        alert('Usuário de teste criado!\nLogin: teste123\nSenha: 123456');
+    const handleNewEnty = () =>
+    {
+        navigate('/createEnt');
     };
 
     // Estatísticas
@@ -77,14 +78,10 @@ function HomeForm() {
                             <p>Gerencie as entidades e seus questionários</p>
                         </div>
                         <div className="section-actions">
-                            <button className="btn-primary">
+                            <button className="btn-primary" onClick={handleNewEnty}>
                                 <Plus className="btn-icon" />
                                 Nova Entidade
-                            </button>
-                            <button className="btn-outline warning" onClick={handleCreateTestUser}>
-                                <Users className="btn-icon" />
-                                Usuário Teste
-                            </button>
+                            </button>                            
                         </div>
                     </div>
 

@@ -3,12 +3,14 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import LoginPage from './pages/LoginPage';
 import HomePageAdmin from './pages/HomePageAdmin';
 import HomePageEnty from './pages/HomePageEnty';
+import CadEntyPage  from './pages/CadEntyPage';
 
 function App() {
     return (
         <Router>
             <Routes>
                 <Route path="/login" element={<LoginPage />} />
+                <Route path='/createEnt' element={<CadEntyPage/>}/>
                 <Route path="/homeAdmin" element={<HomePageAdmin />} />
                 <Route path="/homeEnty" element={<HomePageEnty />} />
                 {/* Rota padrão redireciona para login */}
