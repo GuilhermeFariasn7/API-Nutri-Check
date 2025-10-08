@@ -27,6 +27,7 @@ function CadEntyForm({ onCancel }) {
         responsavelManipulacao: '',
         representanteLegal: '',
         cpfRepresentante: '',
+        cpfManipulador: '',
         motivoInspecao: [],
         type: '',
         category: '',
@@ -43,11 +44,12 @@ function CadEntyForm({ onCancel }) {
         'Açougue',
         'Supermercado',
         'Lanchonete',
-        'Bar',
+        'Pub',
         'Outros'
     ];
 
     const motivosInspecao = [
+        'ROTINEIRA',
         'SOLICITAÇÃO DE LICENÇA SANITÁRIA',
         'PROGRAMAS ESPECÍFICOS DE VIGILÂNCIA SANITÁRIA',
         'VERIFICAÇÃO OU APURAÇÃO DE DENÚNCIA',
@@ -90,7 +92,8 @@ function CadEntyForm({ onCancel }) {
                 if (onCancel) {
                     onCancel();
                 } else {
-                    navigate('/home');
+                    //logica para puxar do banco de dados as entidades e mostrar no dashborad do adm
+                    navigate('/homeAdmin');
                 }
                 setIsLoading(false);
             }, 1000);
@@ -326,6 +329,9 @@ function CadEntyForm({ onCancel }) {
                                     />
                                 </div>
 
+
+                            
+
                                 {/* Categoria */}
                                 <div className="form-group">
                                     <label htmlFor="category">16 - Ramo de Atividade</label>
@@ -338,6 +344,21 @@ function CadEntyForm({ onCancel }) {
                                         {categories.map(category => (
                                             <option key={category} value={category}>{category}</option>
                                         ))}
+                                    </select>
+                                </div>
+
+                                 {/* Tipo */}
+                                <div className="form-group">
+                                    <label htmlFor="type">Tipo</label>
+                                    <select
+                                        id="type"
+                                        value={formData.type}
+                                        onChange={(e) => handleInputChange('type', e.target.value)}
+                                    >
+                                        <option value="">Selecione o tipo</option>
+                                        <option value="Pública">Pública</option>
+                                        <option value="Privada_tercerizada">Privada - Tercerizada</option>
+                                        <option value="Privada_autogestao">Privada - Auto Gestão</option>
                                     </select>
                                 </div>
 
@@ -365,8 +386,12 @@ function CadEntyForm({ onCancel }) {
                                     />
                                 </div>
 
-                                {/* Responsável pela Manipulação */}
                                 <div className="form-group full-width">
+
+                                </div>
+
+                                {/* Responsável pela Manipulação */}
+                                <div className="form-group">
                                     <label htmlFor="responsavelManipulacao">19 - Responsável pela Atividade de Manipulação</label>
                                     <input
                                         id="responsavelManipulacao"
@@ -377,9 +402,25 @@ function CadEntyForm({ onCancel }) {
                                     />
                                 </div>
 
+                                {/* CPF do Manupulador */}
+                                <div className="form-group">
+                                    <label htmlFor="cpfManipulador">20 - CPF do Responsável</label>
+                                    <input
+                                        id="cpfManipulador"
+                                        type="text"
+                                        value={formData.cpfManipulador}
+                                        onChange={(e) => handleInputChange('cpfManipulador', e.target.value)}
+                                        placeholder="000.000.000-00"
+                                    />
+                                </div>
+
+                                <div className="form-group full-width">
+
+                                </div>
+
                                 {/* Representante Legal */}
                                 <div className="form-group">
-                                    <label htmlFor="representanteLegal">20 - Representante Legal</label>
+                                    <label htmlFor="representanteLegal">21 - Representante Legal</label>
                                     <input
                                         id="representanteLegal"
                                         type="text"
@@ -391,7 +432,7 @@ function CadEntyForm({ onCancel }) {
 
                                 {/* CPF do Representante */}
                                 <div className="form-group">
-                                    <label htmlFor="cpfRepresentante">21 - CPF do Representante</label>
+                                    <label htmlFor="cpfRepresentante">22 - CPF do Representante</label>
                                     <input
                                         id="cpfRepresentante"
                                         type="text"
@@ -401,19 +442,9 @@ function CadEntyForm({ onCancel }) {
                                     />
                                 </div>
 
-                                {/* Tipo */}
-                                <div className="form-group">
-                                    <label htmlFor="type">Tipo</label>
-                                    <select
-                                        id="type"
-                                        value={formData.type}
-                                        onChange={(e) => handleInputChange('type', e.target.value)}
-                                    >
-                                        <option value="">Selecione o tipo</option>
-                                        <option value="Pública">Pública</option>
-                                        <option value="Privada">Privada</option>
-                                    </select>
-                                </div>
+                                <div className="form-group full-width">
+
+                                </div>                       
 
                                 {/* Login */}
                                 <div className="form-group">
@@ -423,7 +454,7 @@ function CadEntyForm({ onCancel }) {
                                         type="text"
                                         value={formData.login}
                                         onChange={(e) => handleInputChange('login', e.target.value)}
-                                        placeholder="usuário para acesso"
+                                        placeholder="Usuário para acesso"
                                         required
                                     />
                                 </div>
@@ -436,7 +467,7 @@ function CadEntyForm({ onCancel }) {
                                         type="password"
                                         value={formData.password}
                                         onChange={(e) => handleInputChange('password', e.target.value)}
-                                        placeholder="senha para acesso"
+                                        placeholder="Senha para acesso"
                                         required
                                     />
                                 </div>
