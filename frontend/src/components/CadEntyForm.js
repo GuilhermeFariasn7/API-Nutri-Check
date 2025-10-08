@@ -75,7 +75,7 @@ function CadEntyForm({ onCancel }) {
             const hasEmptyRequired = requiredFields.some(field => !formData[field]);
             
             if (hasEmptyRequired) {
-                alert("Preencha os campos obrigatórios: Razão Social, CNPJ/CPF, E-mail, Login e Senha");
+                alert("Preenchateste os campos obrigatórios: Razão Social, CNPJ/CPF, E-mail, Login e Senha");
                 setIsLoading(false);
                 return;
             }
