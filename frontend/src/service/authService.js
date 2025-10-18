@@ -8,13 +8,17 @@ export const authService = {
         login: credentials.username,
         senha: credentials.password
       });
+      
+      // Apenas salva os dados se a resposta for bem-sucedida
       if (response.data.token) {
         localStorage.setItem('userToken', response.data.token);
         localStorage.setItem('userData', JSON.stringify(response.data.user));
       }
+      
       return response.data;
+      
     } catch (error) {
-      throw new Error(error.response?.data?.message || 'Erro ao fazer login');
+      throw error; // Simplesmente repassa o erro original
     }
   },
 
@@ -45,7 +49,7 @@ export const authService = {
     return !!this.getToken();
   },
 
-  // 🔹 NOVO
+
   getUserType() {
     const user = this.getUserData();
     return user ? user.tipo : null;

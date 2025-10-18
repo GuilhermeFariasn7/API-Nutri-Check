@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Building2, Users, FileText, Plus, LogOut, AlertTriangle, ClipboardList } from "lucide-react";
+import { useAuth } from '../contexts/AuthContext';
+import { Building2, Users, FileText, Plus, LogOut, ClipboardList } from "lucide-react";
 
 function HomeForm() {
     const navigate = useNavigate();
+    const { logout } = useAuth();
     const [entities] = useState([]); // Lista vazia para começar
 
     const handleLogout = () => {
-        navigate('/login');
+        logout(); // ← Isso é ESSENCIAL!
+        navigate('/login', { replace: true });
     };
 
     const handleNewEnty = () =>

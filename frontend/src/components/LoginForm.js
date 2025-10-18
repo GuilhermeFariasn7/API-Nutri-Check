@@ -1,54 +1,29 @@
+// components/LoginForm.js
 import React, { useState } from "react";
-import { Shield, UserCheck, AlertCircle } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { authService } from "../service/authService";
+import { Shield, UserCheck, AlertCircle, CheckCircle } from "lucide-react";
 
-function LoginForm({ onLoginSuccess }) {
+function LoginForm({ onSubmit, isLoading, error, success }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState("");
-    const navigate = useNavigate();
 
+    // components/LoginForm.js
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setIsLoading(true);
-        setError("");
+        e.stopPropagation(); // ← Adiciona isso
+
+        console.log('Form submitted');
 
         try {
-            // Validações básicas
-            if (!username || !password) {
-                throw new Error("Preencha todos os campos");
-            }
-
-            console.log('Dados sendo enviados:', {
-            username: username,
-            password: password
-        });
-
-            // Chamada REAL para o backend
-            const response = await authService.login({
-                username: username,
-                password: password
-            });
-
-            // Login bem-sucedido
-            if (onLoginSuccess) {
-                onLoginSuccess(response);
-            }
-
+            onSubmit({ username, password });
         } catch (error) {
-            setError(error.message);
-            console.error("Erro no login:", error);
-        } finally {
-            setIsLoading(false);
+            // Se houver erro aqui, significa que o onSubmit está throwando erro
+            console.log('Erro no LoginForm:', error);
         }
-        window.location.href = '/';
+        
     };
 
     return (
         <div className="container">
-            {/* Cabeçalho separado */}
             <div className="login-header">
                 <div className="icon-top">
                     <Shield />
@@ -56,20 +31,27 @@ function LoginForm({ onLoginSuccess }) {
                 <h1>Padroniza</h1>
                 <p className="subtitle">Gestão de boas práticas para serviços de alimentação</p>
             </div>
-            
-            {/* Card de login separado */}
+
             <div className="login-card">
                 <h2>Acesso ao Sistema</h2>
                 <p className="instruction">Digite suas credenciais para continuar</p>
-                
-                {/* Mensagem de erro */}
+
+                {/* Mensagem de SUCESSO */}
+                {success && (
+                    <div className="success-message">
+                        <CheckCircle size={18} />
+                        <span>Login realizado com sucesso! Redirecionando...</span>
+                    </div>
+                )}
+
+                {/* Mensagem de ERRO */}
                 {error && (
                     <div className="error-message">
                         <AlertCircle size={18} />
                         <span>{error}</span>
                     </div>
                 )}
-                
+
                 <form onSubmit={handleSubmit}>
                     <div className="input-container">
                         <input
@@ -78,7 +60,7 @@ function LoginForm({ onLoginSuccess }) {
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             required
-                            disabled={isLoading}
+                            disabled={isLoading || success}
                         />
                         <UserCheck className="input-icon" />
                     </div>
@@ -89,16 +71,24 @@ function LoginForm({ onLoginSuccess }) {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
-                            disabled={isLoading}
+                            disabled={isLoading || success}
                         />
                         <Shield className="input-icon" />
                     </div>
-                    <button type="submit" disabled={isLoading}>
+                    <button
+                        type="submit"
+                        disabled={isLoading || success}
+                        className={success ? 'success' : ''}>
                         {isLoading ? (
                             <div className="loading-container">
                                 <div className="spinner" />
                                 <span>Verificando...</span>
                             </div>
+                        ) : success ? (
+                            <>
+                                <CheckCircle className="button-icon" />
+                                <span>Sucesso!</span>
+                            </>
                         ) : (
                             <>
                                 <UserCheck className="button-icon" />
