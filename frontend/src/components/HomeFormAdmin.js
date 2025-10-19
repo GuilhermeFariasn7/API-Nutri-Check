@@ -1,27 +1,82 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from '../contexts/AuthContext';
-import { Building2, Users, FileText, Plus, LogOut, ClipboardList } from "lucide-react";
+import { entidadeService } from '../service/entidadeService';
+import { Building2, Users, FileText, Plus, LogOut, ClipboardList, Edit, Trash2, AlertTriangle } from "lucide-react";
 
 function HomeForm() {
     const navigate = useNavigate();
-    const { logout } = useAuth();
-    const [entities] = useState([]); // Lista vazia para começar
+    const { logout, user } = useAuth();
+    const [entities, setEntities] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    // Buscar entidades do backend
+    useEffect(() => {
+        const carregarEntidades = async () => {
+            try {
+                const entidadesData = await entidadeService.listarEntidades();
+                setEntities(entidadesData);
+            } catch (error) {
+                console.error('Erro ao carregar entidades:', error);
+                alert('Erro ao carregar entidades');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        carregarEntidades();
+    }, []);
 
     const handleLogout = () => {
-        logout(); // ← Isso é ESSENCIAL!
+        logout();
         navigate('/login', { replace: true });
     };
 
-    const handleNewEnty = () =>
-    {
+    const handleNewEnty = () => {
         navigate('/createEnt');
+    };
+
+    const handleDeleteEntity = async (id) => {
+        if (window.confirm('Tem certeza que deseja excluir esta entidade?')) {
+            try {
+                await entidadeService.excluirEntidade(id);
+                // Atualizar lista local
+                setEntities(entities.filter(entity => entity.id !== id));
+                alert('Entidade excluída com sucesso!');
+            } catch (error) {
+                console.error('Erro ao excluir entidade:', error);
+                alert('Erro ao excluir entidade');
+            }
+        }
+    };
+
+    const handleQuestionnaire = (entityId) => {
+        // Navegar para o questionário desta entidade
+        navigate(`/questionario/${entityId}`);
+    };
+
+    const handleReport = (entityId) => {
+        // Navegar para o relatório desta entidade
+        navigate(`/relatorio/${entityId}`);
     };
 
     // Estatísticas
     const entitiesCount = entities.length;
     const pendingQuestionnaires = entities.filter(e => !localStorage.getItem(`responses_${e.id}`)).length;
     const generatedReports = entities.filter(e => localStorage.getItem(`responses_${e.id}`)).length;
+
+    // Verificar se tem respostas (você pode ajustar essa lógica depois)
+    const hasResponses = (entityId) => {
+        return localStorage.getItem(`responses_${entityId}`);
+    };
+
+    if (loading) {
+        return (
+            <div className="home-container">
+                <div className="loading">Carregando...</div>
+            </div>
+        );
+    }
 
     return (
         <div className="home-container">
@@ -34,7 +89,7 @@ function HomeForm() {
                         </div>
                         <div className="header-text">
                             <h1>Painel Administrativo</h1>
-                            <p>Bem-vindo, admin</p>
+                            <p>Bem-vindo, {user?.username || 'admin'}</p>
                         </div>
                     </div>
                     <button className="logout-btn" onClick={handleLogout}>
@@ -96,8 +151,68 @@ function HomeForm() {
                                 <p>Nenhuma entidade cadastrada ainda</p>
                             </div>
                         ) : (
-                            <div className="entity-item">
-                                {/* Conteúdo das entidades aparecerá aqui quando tiver */}
+                            <div className="entities-grid">
+                                {entities.map((entity) => {
+                                    const hasResponse = hasResponses(entity.id);
+                                    
+                                    return (
+                                        <div key={entity.id} className="entity-card">
+                                            <div className="entity-header">
+                                                <div className="entity-info">
+                                                    <h3 className="entity-name">
+                                                        {entity.nomeFantasia || entity.razaoSocial}
+                                                    </h3>
+                                                    <p className="entity-details">
+                                                        {entity.ramoAtividade} • {entity.tipoEmpresa}
+                                                    </p>
+                                                    <p className="entity-details">
+                                                        Responsável: {entity.responsavelManipulacao}
+                                                    </p>
+                                                </div>
+                                                <div className="entity-status">
+                                                    {hasResponse ? (
+                                                        <span className="status-badge success">
+                                                            Completo
+                                                        </span>
+                                                    ) : (
+                                                        <span className="status-badge warning">
+                                                            <AlertTriangle className="status-icon" />
+                                                            Pendente
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            </div>
+                                            
+                                            <div className="entity-actions">
+                                                <button 
+                                                    className="btn-outline"
+                                                    onClick={() => handleQuestionnaire(entity.id)}
+                                                >
+                                                    <ClipboardList className="btn-icon" />
+                                                    Questionário
+                                                </button>
+                                                
+                                                {hasResponse && (
+                                                    <button 
+                                                        className="btn-outline"
+                                                        onClick={() => handleReport(entity.id)}
+                                                    >
+                                                        <FileText className="btn-icon" />
+                                                        Relatório
+                                                    </button>
+                                                )}
+                                                
+                                                <button 
+                                                    className="btn-outline danger"
+                                                    onClick={() => handleDeleteEntity(entity.id)}
+                                                >
+                                                    <Trash2 className="btn-icon" />
+                                                    Excluir
+                                                </button>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
                             </div>
                         )}
                     </div>

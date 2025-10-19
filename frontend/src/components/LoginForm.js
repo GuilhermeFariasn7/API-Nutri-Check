@@ -1,4 +1,4 @@
-// components/LoginForm.js
+
 import React, { useState } from "react";
 import { Shield, UserCheck, AlertCircle, CheckCircle } from "lucide-react";
 
@@ -6,7 +6,7 @@ function LoginForm({ onSubmit, isLoading, error, success }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    // components/LoginForm.js
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         e.stopPropagation(); // ← Adiciona isso
