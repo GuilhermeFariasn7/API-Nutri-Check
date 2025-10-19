@@ -2,7 +2,8 @@ import React from 'react';
 import HomeFormEnty from '../components/HomeFormEnty';
 
 
-function HomePage() {
+function HomePageEnty() {
+  
   return (
     <div>
       <HomeFormEnty />
@@ -10,4 +11,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default HomePageEnty;

@@ -26,8 +26,6 @@ api.interceptors.response.use(
       // Token expirado ou inválido
       localStorage.removeItem('userToken');
       localStorage.removeItem('userData');
-      // 👉 Não recarrega, apenas rejeita o erro
-      // O componente de login já trata esse erro via catch()
     }
     return Promise.reject(error);
   }

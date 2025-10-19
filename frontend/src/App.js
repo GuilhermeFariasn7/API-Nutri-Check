@@ -34,12 +34,12 @@ function App() {
             }
           />
 
-          {/* Rotas protegidas para Enty */}
+          {/* Rotas protegidas para empresa */}
           <Route
             path="/homeEnty"
             element={
-              <ProtectedRoute allowedTypes={['enty']}>
-                <HomePageEnty />
+              <ProtectedRoute allowedTypes={['empresa']}>
+                <HomePageEnty/>
               </ProtectedRoute>
             }
           />

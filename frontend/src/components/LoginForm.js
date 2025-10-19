@@ -9,14 +9,11 @@ function LoginForm({ onSubmit, isLoading, error, success }) {
     
     const handleSubmit = async (e) => {
         e.preventDefault();
-        e.stopPropagation(); // ← Adiciona isso
-
-        console.log('Form submitted');
-
+        e.stopPropagation();
         try {
             onSubmit({ username, password });
         } catch (error) {
-            // Se houver erro aqui, significa que o onSubmit está throwando erro
+            
             console.log('Erro no LoginForm:', error);
         }
         

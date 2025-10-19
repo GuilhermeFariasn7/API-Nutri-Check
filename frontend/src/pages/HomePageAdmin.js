@@ -2,7 +2,7 @@ import React from 'react';
 import HomeFormAdmin from '../components/HomeFormAdmin';
 
 
-function HomePage() {
+function HomePageAdmin() {
   return (
     <div>
       <HomeFormAdmin />
@@ -10,4 +10,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default HomePageAdmin;

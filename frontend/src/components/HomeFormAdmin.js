@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { entidadeService } from '../service/entidadeService';
 import { Building2, Users, FileText, Plus, LogOut, ClipboardList, Edit, Trash2, AlertTriangle } from "lucide-react";
 
-function HomeForm() {
+function AdminDashboard() {
     const navigate = useNavigate();
     const { logout, user } = useAuth();
     const [entities, setEntities] = useState([]);
@@ -222,4 +222,4 @@ function HomeForm() {
     );
 }
 
-export default HomeForm;
+export default AdminDashboard;
