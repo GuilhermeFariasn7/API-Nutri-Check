@@ -1,28 +1,49 @@
 
 import React, { useState } from "react";
 import { Shield, UserCheck, AlertCircle, CheckCircle } from "lucide-react";
+import AdminPanel from './AdminPanel';
 
 function LoginForm({ onSubmit, isLoading, error, success }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [clickCount, setClickCount] = useState(0);
+    const [showAdmin, setShowAdmin] = useState(false);
 
-    
+    const handleLogoClick = () => {
+        const newCount = clickCount + 1;
+        setClickCount(newCount);
+
+        // Reset count after 2 seconds
+        setTimeout(() => {
+            setClickCount(0);
+        }, 4000);
+
+        if (newCount >= 6) {
+            setShowAdmin(true);
+            setClickCount(0);
+        }
+    };
+
+    if (showAdmin) {
+        return <AdminPanel onBack={() => setShowAdmin(false)} />;
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         e.stopPropagation();
         try {
             onSubmit({ username, password });
         } catch (error) {
-            
+
             console.log('Erro no LoginForm:', error);
         }
-        
+
     };
 
     return (
         <div className="container">
             <div className="login-header">
-                <div className="icon-top">
+                <div className="icon-top" onClick={handleLogoClick}>
                     <Shield />
                 </div>
                 <h1>Padroniza</h1>

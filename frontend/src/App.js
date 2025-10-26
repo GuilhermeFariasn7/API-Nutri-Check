@@ -7,15 +7,16 @@ import LoginPage from './pages/LoginPage';
 import HomePageAdmin from './pages/HomePageAdmin';
 import HomePageEnty from './pages/HomePageEnty';
 import CadEntyPage from './pages/CadEntyPage';
+import QuestionaryPageAdmin from './pages/QuestionaryPageAdmin'
 
 function App() {
   return (
     <AuthProvider>
       <Router>
         <Routes>
-          {/* Rota pública */}
+          {/* Rota publica */}
           <Route path="/login" element={<LoginPage />} />
-          
+
           {/* Rotas protegidas para Admin */}
           <Route
             path="/homeAdmin"
@@ -33,20 +34,27 @@ function App() {
               </ProtectedRoute>
             }
           />
-
+          <Route
+            path="/AdminQuestionaries/:entityId"
+            element={
+              <ProtectedRoute allowedTypes={['admin']}>
+                <QuestionaryPageAdmin />
+              </ProtectedRoute>
+            }
+          />
           {/* Rotas protegidas para empresa */}
           <Route
             path="/homeEnty"
             element={
               <ProtectedRoute allowedTypes={['empresa']}>
-                <HomePageEnty/>
+                <HomePageEnty />
               </ProtectedRoute>
             }
           />
 
           {/* Rota padrão - redireciona baseado na autenticação */}
           <Route path="/" element={<LoginPage />} />
-          
+
           {/* Rota curinga */}
           <Route path="*" element={<LoginPage />} />
         </Routes>

@@ -52,7 +52,8 @@ function AdminDashboard() {
 
     const handleQuestionnaire = (entityId) => {
         // Navegar para o questionário desta entidade
-        navigate(`/questionario/${entityId}`);
+        console.log("navegar questionarios: " + `/AdminQuestionaries/${entityId}` );
+        navigate(`/AdminQuestionaries/${entityId}`);
     };
 
     const handleReport = (entityId) => {
@@ -185,7 +186,7 @@ function AdminDashboard() {
                                             
                                             <div className="entity-actions">
                                                 <button 
-                                                    className="btn-outline"
+                                                    className="btn-primary includ"
                                                     onClick={() => handleQuestionnaire(entity.id)}
                                                 >
                                                     <ClipboardList className="btn-icon" />
@@ -194,7 +195,7 @@ function AdminDashboard() {
                                                 
                                                 {hasResponse && (
                                                     <button 
-                                                        className="btn-outline"
+                                                        className="btn-primary includ"
                                                         onClick={() => handleReport(entity.id)}
                                                     >
                                                         <FileText className="btn-icon" />
