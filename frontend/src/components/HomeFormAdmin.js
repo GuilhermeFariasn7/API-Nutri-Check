@@ -95,7 +95,7 @@ function AdminDashboard() {
                     </div>
                     <button className="logout-btn" onClick={handleLogout}>
                         <LogOut className="btn-icon" />
-                        Sair
+                        <p className="logout-btn-text">Sair</p>
                     </button>
                 </div>
             </div>

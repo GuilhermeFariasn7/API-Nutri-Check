@@ -286,22 +286,26 @@ code {
 }
 
 .logout-btn {
-    display: flex;
+    display: flex !important;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1rem !important;
     border: 1px solid #cbd5e1;
     border-radius: 6px;
     background: white;
     color: #475569;
     cursor: pointer;
-    font-size: 0.875rem;
+    font-size: 0.875rem !important;
     white-space: nowrap;
     flex-shrink: 0;
+    height: 35px;
+}
+logout-btn-text{
+    display: inline;
 }
 
 .logout-btn:hover {
-    background: #ff6a00;
+    background: #005a4f;
     color: white;
 }
 
@@ -1046,25 +1050,6 @@ code {
     box-sizing: border-box;
 }
 
-.btn-voltar {
-    position: absolute;
-    left: 1rem;
-    background: none;
-    border: none;
-    color: #f4ede4;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s ease, color 0.2s ease;
-    padding: 0.5rem;
-}
-
-.btn-voltar:hover {
-    transform: scale(1.1);
-    color: #c1a35f;
-}
-
 .titulo-header {
     font-size: 1.5rem;
     font-weight: 600;
@@ -1224,6 +1209,35 @@ button.success {
     width: 100%;
 }
 
+.btn-voltar {
+    margin-left: 1rem;
+    position: absolute;
+    left: 1rem;
+    background: white;
+    border: 1px solid #005a4f;
+    border-radius: 6px;
+    color: #005a4f;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, color 0.2s ease;
+    padding: 0.55rem 1.5rem;
+    gap: 0.5rem;
+    min-width: 120px;
+}
+
+.btn-voltar:hover {
+    transform: scale(1.05);
+    background: #005a4f;
+    color: white;
+}
+
+.btn-voltar-text {
+    display: inline;
+    white-space: nowrap;
+}
+
 .btn-primary.includ {
     display: flex;
     align-items: center;
@@ -1276,13 +1290,26 @@ button.success {
     overflow-x: hidden;
 }
 
+.svnVoltar {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 3px;
+    color: black;
+
+}
+
 .questionary-header {
-    background: white;
-    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0.5rem;
+    border: 1px solid #005a4f;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    padding: 1rem 0;
     margin-bottom: 1rem;
-    width: 100%;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 0.3rem;
 }
 
 .questionary-header-content {
@@ -1305,25 +1332,6 @@ button.success {
     flex-wrap: wrap;
 }
 
-.btn-voltar-questionary {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: #6b7280;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.875rem;
-    transition: background 0.2s;
-    white-space: nowrap;
-}
-
-.btn-voltar-questionary:hover {
-    background: #4b5563;
-}
-
 .questionary-header-text {
     flex: 1;
     min-width: 0;
@@ -1332,7 +1340,7 @@ button.success {
 .questionary-header-text h1 {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #133439;
+    color: #005a4f;
     margin: 0;
     word-wrap: break-word;
     line-height: 1.3;
@@ -1340,7 +1348,7 @@ button.success {
 
 .questionary-header-text p {
     font-size: 0.875rem;
-    color: #64748b;
+    color: #005a4f;
     margin: 0;
     word-wrap: break-word;
 }
@@ -1719,19 +1727,19 @@ button.success {
     background: #fef3c7;
 }
 
-.questionary-radio-input:checked + .questionary-radio-success {
+.questionary-radio-input:checked+.questionary-radio-success {
     background: #10b981;
     color: white;
     border-color: #10b981;
 }
 
-.questionary-radio-input:checked + .questionary-radio-danger {
+.questionary-radio-input:checked+.questionary-radio-danger {
     background: #ef4444;
     color: white;
     border-color: #ef4444;
 }
 
-.questionary-radio-input:checked + .questionary-radio-warning {
+.questionary-radio-input:checked+.questionary-radio-warning {
     background: #f59e0b;
     color: white;
     border-color: #f59e0b;
@@ -1753,7 +1761,8 @@ button.success {
 
 .questionary-navigation-buttons {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     gap: 1rem;
     margin-bottom: 1rem;
     width: 100%;
@@ -1771,7 +1780,7 @@ button.success {
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
     background: white;
-    border: 1px solid #d1d5db;
+    border: 1px solid #00796b;
     border-radius: 6px;
     cursor: pointer;
     font-size: 0.875rem;
@@ -1782,8 +1791,8 @@ button.success {
     box-sizing: border-box;
 }
 
-.btn-outline-questionary:hover:not(:disabled) {
-    background: #f9fafb;
+.btn-outline-questionary:hover {
+    background: #10b981;
     border-color: #9ca3af;
 }
 
@@ -1876,6 +1885,25 @@ button.success {
         justify-content: flex-start;
     }
 
+    /* Botão voltar mobile */
+    .btn-voltar {
+        padding: 0.6rem;
+        min-width: 44px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+    }
+
+    .btn-voltar-text {
+        display: none;
+    }
+
+    .btn-voltar-icon {
+        width: 20px;
+        height: 20px;
+        margin: 0;
+    }
+
     .login-card {
         width: 100%;
         max-width: 100%;
@@ -1897,12 +1925,6 @@ button.success {
     input,
     button {
         font-size: 15px;
-    }
-
-    .header-content {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: flex-start;
     }
 
     .header-left {
@@ -1937,8 +1959,11 @@ button.success {
     }
 
     .logout-btn {
-        width: 100%;
+        width: 20%;
         justify-content: center;
+    }
+    .logout-btn-text{
+        display: none;
     }
 
     .card-content {
@@ -2032,6 +2057,13 @@ button.success {
         font-size: 1.25rem;
     }
 
+    .btn-voltar {
+        left: 0.4rem;
+        min-width: 35px;
+        width: 35px;
+        height: 35px;
+    }
+
     .login-header .subtitle {
         font-size: 12px;
     }
@@ -2112,17 +2144,15 @@ button.success {
         font-size: 1.2rem;
     }
 
-    .btn-voltar {
-        left: 0.8rem;
-    }
-
     /* Questionário Mobile Pequeno */
     .questionary-header-text h1 {
         font-size: 1.125rem;
+        margin-left: 20px;
     }
 
     .questionary-header-text p {
         font-size: 0.8rem;
+        margin-left: 20px;
     }
 
     .questionary-card-title {
@@ -2172,6 +2202,13 @@ button.success {
 @media (max-width: 360px) {
     .home-main {
         padding: 0.25rem;
+    }
+
+    .btn-voltar {
+        left: 0.1rem;
+        min-width: 36px;
+        width: 36px;
+        height: 36px;
     }
 
     .stats-grid {
